@@ -1,7 +1,9 @@
+#app/ulrs.py
 from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    path("headers", views.show_headers),
+    path('hello', views.hello_world),
+    path("headers", views.show_headers)
 ]

@@ -6,6 +6,8 @@ class TaskMember(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     position = models.CharField(max_length=255)
 
+    objects = models.Manager()
+
     def __str__(self):
         return f'{self.user_id} {self.position}'
 
@@ -18,6 +20,8 @@ class Task(models.Model):
     estimate = models.IntegerField('Estimate in hours', default=8)
     name = models.CharField(max_length=511)
     description = models.TextField()
+
+    objects = models.Manager()
 
     def __str__(self):
         return f'{self.id} {self.name} {self.description}'

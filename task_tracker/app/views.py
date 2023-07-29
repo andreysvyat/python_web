@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpRequest
-from django.template import loader
+from django.shortcuts import render
 
 from .models import *
 
@@ -14,8 +14,7 @@ def hello_name(request: HttpRequest, name: str):
 
 def task(reqeust, task_id):
     t = Task.objects.get(id=task_id)
-    template = loader.get_template("task.html")
-    return HttpResponse(template.render({'task': t}))
+    return HttpResponse(render(reqeust, 'task.html', {'task': t}))
 
 
 def task_member_tasks(req, tm_id):

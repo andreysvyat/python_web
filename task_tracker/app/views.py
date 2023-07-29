@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpRequest
+from django.template import loader
 
 from .models import *
 
@@ -13,10 +14,8 @@ def hello_name(request: HttpRequest, name: str):
 
 def task(reqeust, task_id):
     t = Task.objects.get(id=task_id)
-    return HttpResponse(f'Task {t.id} for {t.assigned_to.user_id.username}'
-                        f'<br>name: {t.name} '
-                        f'<br>description: {t.description}'
-                        f'<br>estimated to {t.estimate}')
+    template = loader.get_template("task.html")
+    return HttpResponse(template.render({'task': t}))
 
 
 def task_member_tasks(req, tm_id):

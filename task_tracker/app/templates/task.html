@@ -1,0 +1,9 @@
+{% if task %}
+    <h1>{{task.name}}</h1>
+    <div>
+        <p>Description</p>
+        <p>{{task.description}}</p>
+    </div>
+    <p>Estimate: {{task.estimate}}</p>
+    <p>Status: {{task.status}}</p>
+{% endif %}

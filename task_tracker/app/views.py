@@ -19,11 +19,8 @@ def task(reqeust, task_id):
 
 def task_member_tasks(req, tm_id):
     tm = TaskMember.objects.get(pk=tm_id)
-    created_tasks = Task.objects.filter(created_by=tm.id)
     assigned_tasks = Task.objects.filter(assigned_to=tm.id)
-    return HttpResponse(f'Tasks for {tm.user_id.username}'
-                        f'<br>&emsp;Assigned {"<br>&emsp;&emsp;".join([str(t) for t in assigned_tasks])}'
-                        f'<br>&emsp;Created {"<br>&emsp;&emsp;".join([str(t) for t in created_tasks])}')
+    return HttpResponse(render(req, 'task_member.html', {'task_member': tm, 'tasks': assigned_tasks}))
 
 
 def show_headers(request: HttpRequest):

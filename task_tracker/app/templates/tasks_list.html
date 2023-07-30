@@ -1,8 +1,9 @@
-<h1>{{task_member.user_id.first_name}} {{task_member.user_id.last_name}}</h1>
-<h2>Tasks</h2>
+<h1>Tasks</h1>
 <table>
     <tr>
         <th>Id</th>
+        <th>Created by</th>
+        <th>Assigned to</th>
         <th>Name</th>
         <th>Estimate</th>
         <th>Status</th>
@@ -10,6 +11,8 @@
     {% for task in tasks %}
     <tr>
         <td>{{task.id}}</td>
+        <td><a href="{%url 'app:member_details' task.created_by.id%}">{{task.created_by.user_id.username}}</a></td>
+        <td><a href="{%url 'app:member_details' task.assigned_to.id%}">{{task.assigned_to.user_id.username}}</a></td>
         <td><a href="{%url 'app:task_details' task.id%}">{{task.name}}</a></td>
         <td>{{task.estimate}}</td>
         <td>{{task.status}}</td>

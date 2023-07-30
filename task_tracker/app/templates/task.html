@@ -5,7 +5,7 @@
 </div>
 <p>Estimate: {{task.estimate}}</p>
 <p>Status: {{task.status}}</p>
-<form action="{% url 'app:select' task.id %}" method="post">
+<form action="{% url 'app:change_status' task.id %}" method="post">
     {% csrf_token %}
     <fieldset>
         <legend>Change status</legend>

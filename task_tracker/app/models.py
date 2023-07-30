@@ -22,6 +22,7 @@ class Task(models.Model):
     estimate = models.IntegerField('Estimate in hours', default=8)
     name = models.CharField(max_length=511)
     description = models.TextField()
+    last_access = models.DateTimeField(null=True)
 
     objects = models.Manager()
 

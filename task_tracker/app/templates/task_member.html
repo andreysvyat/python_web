@@ -5,12 +5,14 @@
         <th>Id</th>
         <th>Name</th>
         <th>Estimate</th>
+        <th>Status</th>
     </tr>
     {% for task in tasks %}
     <tr>
         <td>{{task.id}}</td>
         <td><a href="{%url 'task' task.id%}">{{task.name}}</a></td>
         <td>{{task.estimate}}</td>
+        <td>{{task.status}}</td>
     </tr>
     {% endfor %}
 </table>

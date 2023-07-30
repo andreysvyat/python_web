@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as text
 from django.contrib.auth.models import User
 
 
@@ -13,6 +14,7 @@ class TaskMember(models.Model):
 
 
 class Task(models.Model):
+
     created_by = models.ForeignKey(TaskMember, on_delete=models.DO_NOTHING, related_name='created_by')
     assigned_to = models.ForeignKey(TaskMember, on_delete=models.DO_NOTHING, related_name='assigned_to')
     status = models.CharField(max_length=63, default='INIT')

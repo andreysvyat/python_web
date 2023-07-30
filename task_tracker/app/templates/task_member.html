@@ -9,7 +9,7 @@
     {% for task in tasks %}
     <tr>
         <td>{{task.id}}</td>
-        <td><a href="/app/tasks/{{task.id}}">{{task.name}}</a></td>
+        <td><a href="{%url 'task' task.id%}">{{task.name}}</a></td>
         <td>{{task.estimate}}</td>
     </tr>
     {% endfor %}

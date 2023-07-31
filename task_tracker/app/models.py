@@ -1,16 +1,15 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as text
 from django.contrib.auth.models import User
 
 
 class TaskMember(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     position = models.CharField(max_length=255)
 
     objects = models.Manager()
 
     def __str__(self):
-        return f'{self.user_id} {self.position}'
+        return f'{self.user} {self.position}'
 
 
 class Task(models.Model):
@@ -28,3 +27,7 @@ class Task(models.Model):
 
     def __str__(self):
         return f'{self.id} {self.name} {self.description}'
+
+
+class ModelInvalidError(BaseException):
+    pass

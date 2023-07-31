@@ -13,8 +13,8 @@
     {% for task in tasks %}
     <tr>
         <td>{{task.id}}</td>
-        <td><a href="{%url 'app:member_details' task.created_by.id%}">{{task.created_by.user_id.username}}</a></td>
-        <td><a href="{%url 'app:member_details' task.assigned_to.id%}">{{task.assigned_to.user_id.username}}</a></td>
+        <td><a href="{%url 'app:member_details' task.created_by.id%}">{{task.created_by.user.username}}</a></td>
+        <td><a href="{%url 'app:member_details' task.assigned_to.id%}">{{task.assigned_to.user.username}}</a></td>
         <td><a href="{%url 'app:task_details' task.id%}">{{task.name}}</a></td>
         <td>{{task.estimate}}</td>
         <td>{{task.status}}</td>

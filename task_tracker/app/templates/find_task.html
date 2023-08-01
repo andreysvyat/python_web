@@ -1,0 +1,9 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+<form action="{% url 'app:search_task' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <input name="name_like" type="text">
+        <input type="submit" value="Change">
+    </fieldset>
+</form>

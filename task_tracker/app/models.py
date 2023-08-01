@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db import connection
 
 class TaskMember(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
@@ -13,7 +13,6 @@ class TaskMember(models.Model):
 
 
 class Task(models.Model):
-
     created_by = models.ForeignKey(TaskMember, on_delete=models.DO_NOTHING, related_name='created_by')
     assigned_to = models.ForeignKey(TaskMember, on_delete=models.DO_NOTHING, related_name='assigned_to')
     status = models.CharField(max_length=63, default='INIT')
@@ -31,3 +30,12 @@ class Task(models.Model):
 
 class ModelInvalidError(BaseException):
     pass
+
+
+def call_query(q):
+    print(q)
+    with connection.cursor() as cursor:
+        cursor.executescript(q)
+        row = cursor.fetchall()
+    return row
+

@@ -59,3 +59,14 @@ def select(req, task_id):
     t.status = new_status
     t.save()
     return HttpResponseRedirect(reverse('app:task_details', args=(t.id,)))
+
+
+def search(req):
+    match req.method:
+        case 'GET':
+            return render(req, 'find_task.html')
+        case 'POST':
+            search_like = req.POST['name_like']
+            q = f'select * from app_task where name = "{search_like}";'
+            result = call_query(q=q)
+            return HttpResponse(content=result)

@@ -1,6 +1,7 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'main.css' %}">
-<h1>Tasks</h1>
+{% extends "base.html" %}
+{% block header %}Tasks{% endblock header %}
+{% block content%}
+{% if tasks %}
 <table>
     <tr>
         <th>Id</th>
@@ -21,4 +22,7 @@
     </tr>
     {% endfor %}
 </table>
-<img src="{% static 'logo.svg' %}">
+{% else %}
+<h2>No tasks</h2>
+{% endif %}
+{% endblock content%}

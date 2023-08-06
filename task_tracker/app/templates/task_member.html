@@ -1,7 +1,8 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'main.css' %}">
-<h1>{{task_member.user.first_name}} {{task_member.user.last_name}}</h1>
+{% extends "base.html" %}
+{% block header %}{{task_member.user.first_name}} {{task_member.user.last_name}}{% endblock header %}
+{% block content %}
 <h2>Tasks</h2>
+{% if tasks %}
 <table>
     <tr>
         <th>Id</th>
@@ -18,4 +19,7 @@
     </tr>
     {% endfor %}
 </table>
-<img src="{% static 'logo.svg' %}">
+{% else %}
+<h2>No tasks</h2>
+{% endif %}
+{% endblock content %}

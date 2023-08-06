@@ -1,6 +1,6 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'main.css' %}">
-<h1>{{ task.name }}</h1>
+{% extends "base.html" %}
+{% block header %}{{ task.name }} {% endblock header %}
+{% block content%}
 <div>
     <p>Description</p>
     <p>{{task.description | safe}}</p>
@@ -19,4 +19,4 @@
         <input type="submit" value="Change">
     </fieldset>
 </form>
-<img src="{% static 'logo.svg' %}">
+{% endblock content %}

@@ -1,7 +1,9 @@
-FROM python:3
+FROM python:3.11.4
 WORKDIR /home
-CMD git clone https://github.com/andreysvyat/python_web.git app
-CMD cd app
+RUN git clone https://github.com/andreysvyat/python_web.git app
+RUN ls -l
+WORKDIR /home/app
+RUN ls -l
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
-CMD ["python", "task_tracker/manage.py", "runserver", "--noreload"]
+RUN python task_tracker/manage.py migrate
+CMD ["python", "task_tracker/manage.py", "runserver", "--noreload", "0.0.0.0:8000"]

@@ -1,5 +1,5 @@
 .idea/
 .vevn/
 *~*
-*/__pycache__/
+**/__pycache__/*
 task_tracker/db.sqlite3

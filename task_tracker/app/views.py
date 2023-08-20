@@ -29,7 +29,7 @@ def request_meta(req: HttpRequest):
         f'Method: {req.method}<br>' \
         f'Encoding: {req.encoding}<br>' \
         f'Content-Type: {req.content_type}<br>' \
-        f'Get query as dictionary: {req.GET}<br>' \
+        f'Get query as dictionary: {req.GET.dict()}<br>' \
         f'Cookies: {req.COOKIES}<br>' \
         f'META or headers: {__headers_to_string(req.headers)}<br>' \
         f'Methods:' \
@@ -40,7 +40,9 @@ def request_meta(req: HttpRequest):
 
 
 def hello_name(request: HttpRequest, name: str):
-    return HttpResponse(content=f'Hello {name}')
+    if request.GET.get('surname'):
+        return HttpResponse(content=f'Hello {name.capitalize()} {request.GET.get("surname")}')
+    return HttpResponse(content=f'Hello {name.capitalize()}')
 
 
 class TaskView(generic.DetailView):

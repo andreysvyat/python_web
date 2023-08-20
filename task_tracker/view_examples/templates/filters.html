@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>filters</title>
+    <style>table, th, td {border: 1px solid black;}</style>
+</head>
+<body>
+<textarea readonly style="width: 50%; height: 10em;">{{context|pprint}}</textarea>
+<table style="width: 50%">
+    <tr>
+        <td>Filter</td>
+        <td>View</td>
+    </tr>
+    <tr>
+        <td>name|add:" "|add:surname</td>
+        <td>{{ name|add:" "|add:surname }}</td>
+    </tr>
+    <tr>
+        <td>to_lower|lower</td>
+        <td>{{ to_lower|lower}}</td>
+    </tr>
+    <tr>
+        <td>to_upper|upper</td>
+        <td>{{ to_upper|upper}}</td>
+    </tr>
+    <tr>
+        <td>now|date</td>
+        <td>{{ now|date }}</td>
+    </tr>
+    <tr>
+        <td>now|date:"D d M Y"</td>
+        <td>{{ now|date:"D d M Y" }}</td>
+    </tr>
+    <tr>
+        <td>now|date:"SHORT_DATE_FORMAT"</td>
+        <td>{{ now|date:"SHORT_DATE_FORMAT" }}</td>
+    </tr>
+    <tr>
+        <td>now|time</td>
+        <td>{{ now|time}}</td>
+    </tr>
+    <tr>
+        <td>now|time:"H\h i\m"</td>
+        <td>{{ now|time:"H\h i\m"}}</td>
+    </tr>
+    <tr>
+        <td>now|time:"TIME_FORMAT"</td>
+        <td>{{ now|time:"TIME_FORMAT"}}</td>
+    </tr>
+</table>
+<p></p>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load math_filter %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>repeatable</title>
+    <style>table, th, td {border: 1px solid black;}</style>
+</head>
+<body>
+<table style="width:50%;">
+    <tr>
+        <th>Function</th>
+        <th>Tag</th>
+        <th>Result</th>
+    </tr>
+    <tr>
+        <td>Остаток от деления {{a}} на {{b}}</td>
+        <td>{% autoescape off%}{a|modulo:b}{%endautoescape%}</td>
+        <td>{a|modulo:b}</td>
+    </tr>
+    <tr>
+        <td>Умножение {{a}} на {{b}}</td>
+        <td>{% autoescape off%}{a|multiply:b}{%endautoescape%}</td>
+        <td>{a|multiply:b}</td>
+    </tr>
+    <tr>
+        <td>Возведение {{a}} в степень {{b}}</td>
+        <td>{% autoescape off%}{a|power:b}{%endautoescape%}</td>
+        <td>{a|power:b}</td>
+    </tr>
+</table>
+</body>
+</html>

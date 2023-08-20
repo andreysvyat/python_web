@@ -10,9 +10,6 @@
 <div><a href="/app">Главная</a></div>
 <h1>{% block header %}{% endblock header %}</h1>
 <div>{% block content%}{% endblock content %}</div>
-<div>
-    <a href="/app"><img src="{% static 'logo.svg' %}" alt="Логотип МЭО"></a>
-    <p>МЭО 2023. Все права защищены.</p>
-</div>
+{% include banner.html %}
 </body>
 </html>

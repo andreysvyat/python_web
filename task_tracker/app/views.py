@@ -1,15 +1,15 @@
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from django.views import generic
 from django.utils.timezone import now
-from http.cookies import SimpleCookie
+from django.views import generic
 
 from .models import *
 
 STATUSES = ['INIT', 'IN_PROGRESS', 'TEST', 'DONE']
 
 
+# noinspection PyUnusedLocal
 def hello_world(request: HttpRequest):
     return HttpResponse(content='Hello world')
 
@@ -37,6 +37,16 @@ def request_meta(req: HttpRequest):
         f'<br>&emsp;get_host(): {req.get_host()}' \
         f'<br>&emsp;get_port(): {req.get_port()}'
     return HttpResponse(content=c)
+
+
+def play_with_response(req: HttpRequest):
+    content = req.GET.get('content')
+    headers = {str(h).split(':')[0]: str(h).split(':')[1] for h in req.GET.getlist('headers')}
+    charset = req.GET.get('charset', None)
+    status = int(req.GET.get('status', 200))
+    reason = req.GET.get('reason', None)
+    content_type = req.GET.get('type', None)
+    return HttpResponse(content, content_type, status, reason, charset, headers)
 
 
 def hello_name(request: HttpRequest, name: str):

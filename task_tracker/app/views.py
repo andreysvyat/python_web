@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from django.utils.timezone import now
+from http.cookies import SimpleCookie
 
 from .models import *
 
@@ -14,8 +15,28 @@ def hello_world(request: HttpRequest):
 
 
 def show_headers(request: HttpRequest):
-    headers = [f'<br>&emsp;{key}: {value}' for key, value in request.headers.items()]
-    return HttpResponse(f'Hello from my first view<br>Headers in from your request: {"".join(headers)}')
+    return HttpResponse(f'Hello from my first view<br>Headers in from your request: {request.headers}')
+
+
+def __headers_to_string(headers):
+    headers = [f'<br>&emsp;{key}: {value}' for key, value in headers.items()]
+    return f'{"".join(headers)}'
+
+
+def request_meta(req: HttpRequest):
+    c = f'Scheme: {req.scheme}<br>' \
+        f'Path: {req.path}<br>' \
+        f'Method: {req.method}<br>' \
+        f'Encoding: {req.encoding}<br>' \
+        f'Content-Type: {req.content_type}<br>' \
+        f'Get query as dictionary: {req.GET}<br>' \
+        f'Cookies: {req.COOKIES}<br>' \
+        f'META or headers: {__headers_to_string(req.headers)}<br>' \
+        f'Methods:' \
+        f'<br>&emsp;get_full_path(): {req.get_full_path()}' \
+        f'<br>&emsp;get_host(): {req.get_host()}' \
+        f'<br>&emsp;get_port(): {req.get_port()}'
+    return HttpResponse(content=c)
 
 
 def hello_name(request: HttpRequest, name: str):

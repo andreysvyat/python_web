@@ -5,11 +5,12 @@
     <meta charset="utf-8"/>
     <title>{% block title %}Task tracker{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'main.css' %}">
+    {% block styles %}{% endblock styles %}
 </head>
 <body>
 <div><a href="/app">Главная</a></div>
 <h1>{% block header %}{% endblock header %}</h1>
 <div>{% block content%}{% endblock content %}</div>
-{% include banner.html %}
+{% include 'banner.html' %}
 </body>
 </html>

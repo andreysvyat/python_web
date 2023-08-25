@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'app.css' %}">
+{% endblock styles %}
 {% block header %}Tasks{% endblock header %}
 {% block content%}
 {% if tasks %}
-<table>
+<table class="tasks">
     <tr>
         <th>Id</th>
         <th>Created by</th>

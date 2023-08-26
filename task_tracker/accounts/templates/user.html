@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block header %}{{ user.full_name }} {% endblock header %}
+{% block content%}
+<div id="user_info">
+    {% include 'text_field.html' with id="user_first_name" label="First name" value=user.first_name %}
+    {% include 'text_field.html' with id="short_name" label="Short name" value=user.short_name %}
+    {% include 'text_field.html' with id="user_last_name" label="Last name" value=user.last_name %}
+    {% include 'text_field.html' with id="user_login" label="Login" value=user.login %}
+    {% include 'text_field.html' with id="last_login" label="Logged in last time" value=user.last_login %}
+    {% include 'text_field.html' with id="created" label="User was created" value=user.created %}
+    <table>
+        <tr>
+            <th>Active</th>
+            <th>Admin</th>
+            <th>Superuser</th>
+            <th>Authenticated</th>
+            <th>Anonymous</th>
+        </tr>
+        <tr>
+            <td>{{user.is_active}}</td>
+            <td>{{user.is_admin}}</td>
+            <td>{{user.is_super_user}}</td>
+            <td>{{user.is_authenticated}}</td>
+            <td>{{user.is_anonim}}</td>
+        </tr>
+    </table>
+</div>
+{% include 'list_view.html' with items=user.groups empty_msg="No groups" header="Groups" id="groups_view" %}
+{% include 'list_view.html' with items=user.permissions empty_msg="No permissions" header="Permissions" id="perms_view"%}
+<form action="{% url 'accounts:has_perm' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Has {{user.full_name }} permission?</legend>
+        <select id="permissions" name="perm">
+            {% for perm in all_perms %}
+            <option value="{{perm.code}}" name="perm">{{perm.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Check">
+        {% if has_permission is not None %}
+        <span>Has permission '{{permission}}' - {{ has_permission }}</span>
+        {% endif %}
+    </fieldset>
+</form>
+<form action="{% url 'accounts:email' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <div>
+            {%include 'text_input.html' with id="subject" field="subject" desc="Subject"%}
+            {%include 'text_input.html' with id="from_email" field="from_email" desc="From"%}
+        </div>
+        <div>
+            <textarea id="{{text}}" name="message"></textarea>
+        </div>
+        <input type="submit" value="Send">
+    </fieldset>
+</form>
+<form action="{% url 'accounts:upd_pass' %}" method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <div style="display: inline;">
+            {%include 'text_input.html' with id="password" field="password" desc="New password" type="password"%}
+        </div>
+        <input type="submit" value="Set">
+    </fieldset>
+</form>
+{% endblock content %}

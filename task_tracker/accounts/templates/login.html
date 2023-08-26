@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block header %} LOGIN {% endblock header %}
+{% block content%}
+{% if error %}
+<p style="color: red;">{{error}}</p>
+{% endif %}
+<a href="{% url 'accounts:signin' %}">Sign in</a>
+<form method="post" action="{% url 'accounts:login' %}" style="display:table-caption;">
+    {% csrf_token %}
+    <label for="login">Login</label>
+    <input type="text" id="login" name="login">
+    <label for="pass">Password</label>
+    <input type="password" id="pass" name="password">
+    <input type="submit" value="Login">
+</form>
+{% endblock content %}

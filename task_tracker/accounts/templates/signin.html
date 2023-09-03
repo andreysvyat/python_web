@@ -4,16 +4,17 @@
 {% if error %}
 <p style="color: red;">{{error}}</p>
 {% endif %}
-<form method="post" action="{% url 'accounts:login' %}" style="display:table-caption;">
+<form method="post" action="{% url 'accounts:signin' %}" style="display:table-caption;">
     {% csrf_token %}
     {%if error %}
     <p style="color: red;">{{error}}</p>
     {% endif %}
     {%include 'text_input.html' with id="login" field="login" desc="Login"%}
     {%include 'text_input.html' with id="pass" field="password" desc="Password" type="password"%}
-    {%include 'text_input.html' with id="spass" field="spass" desc="Submit password"%}
+    {%include 'text_input.html' with id="spass" field="spass" desc="Submit password" type="password"%}
     {%include 'text_input.html' with id="first_name" field="first_name" desc="First name"%}
     {%include 'text_input.html' with id="last_name" field="last_name" desc="Last name"%}
     {%include 'text_input.html' with id="email" field="email" desc="Email"%}
+    <input type="submit" value="Sign in">
 </form>
 {% endblock content %}

@@ -27,7 +27,7 @@
 </div>
 {% include 'list_view.html' with items=user.groups empty_msg="No groups" header="Groups" id="groups_view" %}
 {% include 'list_view.html' with items=user.permissions empty_msg="No permissions" header="Permissions" id="perms_view"%}
-<form action="{% url 'accounts:has_perm' %}" method="post">
+<form action="{% url 'accounts:me' %}" method="post">
     {% csrf_token %}
     <fieldset>
         <legend>Has {{user.full_name }} permission?</legend>
@@ -55,13 +55,23 @@
         <input type="submit" value="Send">
     </fieldset>
 </form>
-<form action="{% url 'accounts:upd_pass' %}" method="POST">
+<form action="{% url 'accounts:me' %}" method="POST">
     {% csrf_token %}
     <fieldset>
         <div style="display: inline;">
-            {%include 'text_input.html' with id="password" field="password" desc="New password" type="password"%}
+            {%include 'text_input.html' with id="password" field="new_password" desc="New password" type="password"%}
         </div>
         <input type="submit" value="Set">
     </fieldset>
 </form>
+{% if errors %}
+<div style="color: red;" class="errors">
+    <span>There are some errors on request</span>
+    <ul>
+        {% for error in errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 {% endblock content %}

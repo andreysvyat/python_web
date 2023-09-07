@@ -1,7 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.urls import path
+from django.urls import path, re_path
+from django.views.static import serve
 
+from task_tracker import settings
 from . import views
 
 urlpatterns = [
@@ -11,3 +13,14 @@ urlpatterns = [
     path('repeatable', views.repeatable),
     path('filters', views.filters)
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(
+            r"^media/(?P<path>.*)$",
+            serve,
+            {
+                "document_root": settings.MEDIA_ROOT,
+            },
+        ),
+    ]

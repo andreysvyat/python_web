@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.http import HttpResponse
 from django.urls import include, path
 
 import view_examples.urls
@@ -25,3 +26,10 @@ urlpatterns = [
     path("views/", include(view_examples.urls.urlpatterns)),
     path("accounts/", include("accounts.urls"))
 ]
+
+
+def response_error_handler(request, exception, template=""):
+    return HttpResponse("<h1>Forbidden</h1>")
+
+
+handler403 = response_error_handler

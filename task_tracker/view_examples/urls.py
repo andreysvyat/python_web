@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+import django.views.defaults
+from django.http import HttpResponse, JsonResponse, HttpResponseServerError, HttpResponseNotFound
 from django.shortcuts import render
 from django.urls import path, re_path
 from django.views.static import serve
@@ -11,7 +12,9 @@ urlpatterns = [
     path('comment', lambda req: HttpResponse(render(req, "comment.html"))),
     path('load', lambda req: HttpResponse(render(req, "load.html", req.GET.dict()))),
     path('repeatable', views.repeatable),
-    path('filters', views.filters)
+    path('filters', views.filters),
+    path('server_error', django.views.defaults.server_error),
+    path('raise', views.raise_ex)
 ]
 
 if settings.DEBUG:

@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+from django.core.exceptions import PermissionDenied, SuspiciousOperation
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.utils.timezone import now
 
@@ -26,3 +27,15 @@ def filters(req):
     context = {"context": FILTERS_CONTEXT}
     context.update(FILTERS_CONTEXT)
     return HttpResponse(render(req, "filters.html", context))
+
+
+def raise_ex(req):
+    match req.GET['ex']:
+        case 'bad_request':
+            raise SuspiciousOperation
+        case 'not_allowed':
+            raise PermissionDenied
+        case 'not_found':
+            raise Http404
+        case _:
+            raise Exception

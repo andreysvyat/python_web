@@ -11,7 +11,8 @@ STATUSES = ['INIT', 'IN_PROGRESS', 'TEST', 'DONE']
 
 # noinspection PyUnusedLocal
 def hello_world(request: HttpRequest):
-    return HttpResponse(content='Hello world')
+    print("Do some staff")
+    return HttpResponse(content="Hello world")
 
 
 def show_headers(request: HttpRequest):
